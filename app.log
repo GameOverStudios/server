@@ -1,0 +1,45 @@
+2024-10-27 09:40:09,756 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.110:5000
+2024-10-27 09:40:09,757 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-27 09:40:09,759 - INFO -  * Restarting with stat
+2024-10-27 09:40:10,390 - WARNING -  * Debugger is active!
+2024-10-27 09:40:10,393 - INFO -  * Debugger PIN: 118-470-085
+2024-10-27 09:40:16,952 - INFO - Requisição recebida: GET /
+2024-10-27 09:40:16,954 - INFO - Fechando conexão com o banco de dados.
+2024-10-27 09:40:16,955 - INFO - 127.0.0.1 - - [27/Oct/2024 09:40:16] "[33mGET / HTTP/1.1[0m" 404 -
+2024-10-27 09:40:22,642 - INFO - Requisição recebida: GET /health
+2024-10-27 09:40:22,643 - INFO - Fechando conexão com o banco de dados.
+2024-10-27 09:40:22,643 - INFO - 127.0.0.1 - - [27/Oct/2024 09:40:22] "GET /health HTTP/1.1" 200 -
+2024-10-27 09:40:30,493 - INFO -  * Detected change in 'C:\\Users\\Romeu\\Documents\\Python Server\\main.py', reloading
+2024-10-27 09:40:30,741 - INFO -  * Restarting with stat
+2024-10-27 09:40:31,422 - WARNING -  * Debugger is active!
+2024-10-27 09:40:31,425 - INFO -  * Debugger PIN: 118-470-085
+2024-10-27 09:42:32,912 - INFO -  * Detected change in 'C:\\Users\\Romeu\\Documents\\Python Server\\main.py', reloading
+2024-10-27 09:42:33,239 - INFO -  * Restarting with stat
+2024-10-27 09:42:34,136 - WARNING -  * Debugger is active!
+2024-10-27 09:42:34,139 - INFO -  * Debugger PIN: 118-470-085
+2024-10-27 09:42:38,024 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.110:5000
+2024-10-27 09:42:38,025 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-27 09:42:38,027 - INFO -  * Restarting with stat
+2024-10-27 09:42:38,633 - WARNING -  * Debugger is active!
+2024-10-27 09:42:38,635 - INFO -  * Debugger PIN: 118-470-085
+2024-10-27 09:44:17,046 - INFO -  * Detected change in 'C:\\Users\\Romeu\\Documents\\Python Server\\main.py', reloading
+2024-10-27 09:44:17,288 - INFO -  * Restarting with stat
+2024-10-27 09:44:18,018 - WARNING -  * Debugger is active!
+2024-10-27 09:44:18,020 - INFO -  * Debugger PIN: 118-470-085
+2024-10-27 10:01:07,255 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.110:5000
+2024-10-27 10:01:07,256 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-27 10:01:07,259 - INFO -  * Restarting with stat
+2024-10-27 10:01:07,883 - WARNING -  * Debugger is active!
+2024-10-27 10:01:07,885 - INFO -  * Debugger PIN: 118-470-085
+2024-10-27 10:01:27,589 - INFO - Requisição recebida: GET /health
+2024-10-27 10:01:27,590 - INFO - Fechando conexão com o banco de dados.
+2024-10-27 10:01:27,591 - INFO - 127.0.0.1 - - [27/Oct/2024 10:01:27] "GET /health HTTP/1.1" 200 -
