@@ -43,3 +43,11 @@
 2024-10-27 10:01:27,589 - INFO - Requisição recebida: GET /health
 2024-10-27 10:01:27,590 - INFO - Fechando conexão com o banco de dados.
 2024-10-27 10:01:27,591 - INFO - 127.0.0.1 - - [27/Oct/2024 10:01:27] "GET /health HTTP/1.1" 200 -
+2024-10-27 10:44:46,338 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.110:5000
+2024-10-27 10:44:46,338 - INFO - [33mPress CTRL+C to quit[0m
+2024-10-27 10:44:46,340 - INFO -  * Restarting with stat
+2024-10-27 10:44:46,851 - WARNING -  * Debugger is active!
+2024-10-27 10:44:46,854 - INFO -  * Debugger PIN: 118-470-085

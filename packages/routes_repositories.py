@@ -5,9 +5,9 @@ import logging
 from flask import Blueprint, jsonify, request, abort, url_for, current_app 
 from packages.auth import requires_auth, requires_admin
 
-bp_repositories = Blueprint('repositories', __name__, url_prefix='/api/repositories')  # Define o blueprint
+repositories_bp = Blueprint('repositories', __name__, url_prefix='/api/repositories')  # Define o blueprint
 
-@bp_repositories.route('', methods=['GET']) # Lista todos os repositórios
+@repositories_bp.route('', methods=['GET']) # Lista todos os repositórios
 @requires_auth
 def get_repositories():
 
@@ -17,7 +17,7 @@ def get_repositories():
         query = session.query(models.Repository)
         return utils.paginate(query, request=request, url_for=url_for)
 
-@bp_repositories.route('/<int:repository_id>', methods=['GET']) # Detalhes de um repositório específico
+@repositories_bp.route('/<int:repository_id>', methods=['GET']) # Detalhes de um repositório específico
 @requires_auth
 def get_repository(repository_id):
 
@@ -32,7 +32,7 @@ def get_repository(repository_id):
 
         return jsonify(repository.to_dict())
 
-@bp_repositories.route('', methods=['POST'])  # Cria um novo repositório
+@repositories_bp.route('', methods=['POST'])  # Cria um novo repositório
 @requires_auth
 @requires_admin
 def create_repository():
@@ -64,7 +64,7 @@ def create_repository():
             logging.exception("Erro ao criar repositório: %s", e)
             abort(500, description=f"Erro ao criar repositório: {str(e)}") # Erro interno do servidor
 
-@bp_repositories.route('/<int:repository_id>', methods=['PUT'])  # Atualiza um repositório
+@repositories_bp.route('/<int:repository_id>', methods=['PUT'])  # Atualiza um repositório
 @requires_auth
 @requires_admin
 def update_repository(repository_id):
@@ -97,7 +97,7 @@ def update_repository(repository_id):
 
            abort(500, description=f"Erro ao atualizar repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>', methods=['DELETE']) # Exclui um repositório
+@repositories_bp.route('/<int:repository_id>', methods=['DELETE']) # Exclui um repositório
 @requires_auth
 @requires_admin
 def delete_repository(repository_id):
@@ -124,7 +124,7 @@ def delete_repository(repository_id):
 
              abort(500, description=f"Erro ao excluir repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>/developers', methods=['POST']) # Adiciona um desenvolvedor a um repositório
+@repositories_bp.route('/<int:repository_id>/developers', methods=['POST']) # Adiciona um desenvolvedor a um repositório
 @requires_auth
 @requires_admin
 def add_developer(repository_id):
@@ -162,7 +162,7 @@ def add_developer(repository_id):
             logging.exception("Erro ao adicionar desenvolvedor ao repositório: %s", e)
             abort(500, description=f"Erro ao adicionar desenvolvedor ao repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>/developers/<int:developer_id>', methods=['DELETE']) # Remove um desenvolvedor de um repositório
+@repositories_bp.route('/<int:repository_id>/developers/<int:developer_id>', methods=['DELETE']) # Remove um desenvolvedor de um repositório
 @requires_auth
 @requires_admin
 def remove_developer(repository_id, developer_id):
@@ -192,7 +192,7 @@ def remove_developer(repository_id, developer_id):
              logging.exception("Erro ao remover desenvolvedor do repositório: %s", e)
              abort(500, description=f"Erro ao remover desenvolvedor do repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>/mirrors', methods=['POST']) # Adiciona um espelho a um repositório
+@repositories_bp.route('/<int:repository_id>/mirrors', methods=['POST']) # Adiciona um espelho a um repositório
 @requires_auth
 @requires_admin
 def add_mirror(repository_id):
@@ -234,7 +234,7 @@ def add_mirror(repository_id):
 
             abort(500, description=f"Erro ao adicionar espelho ao repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>/mirrors/<int:mirror_repository_id>', methods=['DELETE']) # Remove um espelho de um repositório
+@repositories_bp.route('/<int:repository_id>/mirrors/<int:mirror_repository_id>', methods=['DELETE']) # Remove um espelho de um repositório
 @requires_auth
 @requires_admin
 def remove_mirror(repository_id, mirror_repository_id):
@@ -273,7 +273,7 @@ def remove_mirror(repository_id, mirror_repository_id):
 
             abort(500, description=f"Erro ao remover espelho do repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>/config', methods=['PUT'])  # Configura um repositório (exemplo)
+@repositories_bp.route('/<int:repository_id>/config', methods=['PUT'])  # Configura um repositório (exemplo)
 @requires_auth
 @requires_admin
 def configure_repository(repository_id):
@@ -312,7 +312,7 @@ def configure_repository(repository_id):
              logging.exception("Erro ao configurar o repositório: %s", e)
              abort(500, description=f"Erro ao configurar o repositório: {str(e)}")
 
-@bp_repositories.route('/<int:repository_id>/developers', methods=['GET'])
+@repositories_bp.route('/<int:repository_id>/developers', methods=['GET'])
 @requires_auth
 def list_developers(repository_id):
     db_connection = current_app.config['DB_CONNECTION']
@@ -324,7 +324,7 @@ def list_developers(repository_id):
         developers = [dev.to_dict() for dev in repository.developers]  # Usa o relacionamento para obter os desenvolvedores
         return jsonify(developers), 200
     
-@bp_repositories.route('/<int:repository_id>/mirrors', methods=['GET'])
+@repositories_bp.route('/<int:repository_id>/mirrors', methods=['GET'])
 @requires_auth
 def list_mirrors(repository_id):
     db_connection = current_app.config['DB_CONNECTION']
@@ -338,7 +338,7 @@ def list_mirrors(repository_id):
         mirrors = [mirror.to_dict() for mirror in repository.mirrors]
         return jsonify(mirrors), 200
     
-@bp_repositories.route('/search', methods=['GET'])
+@repositories_bp.route('/search', methods=['GET'])
 @requires_auth
 def search_repositories():
     db_connection = current_app.config['DB_CONNECTION']
@@ -357,7 +357,7 @@ def search_repositories():
 
         return utils.paginate(query, request=request, url_for=url_for)
     
-@bp_repositories.route('/<int:repository_id>/status', methods=['PUT'])
+@repositories_bp.route('/<int:repository_id>/status', methods=['PUT'])
 @requires_auth
 @requires_admin
 def update_repository_status(repository_id):
