@@ -7,25 +7,59 @@
 # General application configuration
 import Config
 
-config :todos,
-  ecto_repos: [Todos.Repo],
+config :deeper_server,
+  ecto_repos: [DeeperServer.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :todos, TodosWeb.Endpoint,
+config :deeper_server, DeeperServerWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [json: TodosWeb.ErrorJSON],
+    formats: [html: DeeperServerWeb.ErrorHTML, json: DeeperServerWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Todos.PubSub,
-  live_view: [signing_salt: "rxfg8dr+"]
+  pubsub_server: DeeperServer.PubSub,
+  live_view: [signing_salt: "OQP5f14m"]
+
+# Configures the mailer
+#
+# By default it uses the "Local" adapter which stores the emails
+# locally. You can see the emails in your browser, at "/dev/mailbox".
+#
+# For production it's recommended to configure a different adapter
+# at the `config/runtime.exs`.
+config :deeper_server, DeeperServer.Mailer, adapter: Swoosh.Adapters.Local
+
+# Configure esbuild (the version is required)
+config :esbuild,
+  version: "0.17.11",
+  deeper_server: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
+
+# Configure tailwind (the version is required)
+config :tailwind,
+  version: "3.4.3",
+  deeper_server: [
+    args: ~w(
+      --config=tailwind.config.js
+      --input=css/app.css
+      --output=../priv/static/assets/app.css
+    ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
-  metadata: [:request_id]
+  metadata: [:request_id],
+  backends: [
+    {Logger.ConsoleBackend, color: true}
+  ]
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason

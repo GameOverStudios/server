@@ -1,4 +1,4 @@
-# Todos
+# DeeperServer
 
 To start your Phoenix server:
 

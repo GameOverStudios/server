@@ -1,8 +1,8 @@
 import Config
 
 # Configure your database
-config :todos, Todos.Repo,
-  database: Path.expand("../todos_dev.db", __DIR__),
+config :deeper_server, DeeperServer.Repo,
+  database: Path.expand("../deeper_server_dev.db", __DIR__),
   pool_size: 5,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
@@ -13,15 +13,18 @@ config :todos, Todos.Repo,
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we can use it
 # to bundle .js and .css sources.
-config :todos, TodosWeb.Endpoint,
+config :deeper_server, DeeperServerWeb.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
   http: [ip: {127, 0, 0, 1}, port: 4000],
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "24SgLz4qToC6PGZJNZVE1jenFqE9VTSfJTRsTXd/NZqd8IMNlUpb94ucdTqKQklL",
-  watchers: []
+  secret_key_base: "2By+4DUP1KkeAZ75HB+v0FSFaYrirsabjwAtc2R1Fy007erTboj0MJlx0f5jQF7X",
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:deeper_server, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:deeper_server, ~w(--watch)]}
+  ]
 
 # ## SSL Support
 #
@@ -46,8 +49,18 @@ config :todos, TodosWeb.Endpoint,
 # configured to run both http and https servers on
 # different ports.
 
+# Watch static and templates for browser reloading.
+config :deeper_server, DeeperServerWeb.Endpoint,
+  live_reload: [
+    patterns: [
+      ~r"priv/static/(?!uploads/).*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"priv/gettext/.*(po)$",
+      ~r"lib/deeper_server_web/(controllers|live|components)/.*(ex|heex)$"
+    ]
+  ]
+
 # Enable dev routes for dashboard and mailbox
-config :todos, dev_routes: true
+config :deeper_server, dev_routes: true
 
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
@@ -58,3 +71,12 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :phoenix_live_view,
+  # Include HEEx debug annotations as HTML comments in rendered markup
+  debug_heex_annotations: true,
+  # Enable helpful, but potentially expensive runtime checks
+  enable_expensive_runtime_checks: true
+
+# Disable swoosh api client as it is only required for production adapters.
+config :swoosh, :api_client, false
