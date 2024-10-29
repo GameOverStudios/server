@@ -7,20 +7,20 @@
 # General application configuration
 import Config
 
-config :deeper_server,
-  ecto_repos: [DeeperServer.Repo],
+config :blog,
+  ecto_repos: [Blog.Repo],
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :deeper_server, DeeperServerWeb.Endpoint,
+config :blog, BlogWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [html: DeeperServerWeb.ErrorHTML, json: DeeperServerWeb.ErrorJSON],
+    formats: [html: BlogWeb.ErrorHTML, json: BlogWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: DeeperServer.PubSub,
-  live_view: [signing_salt: "XFMtpobm"]
+  pubsub_server: Blog.PubSub,
+  live_view: [signing_salt: "u6watsO6"]
 
 # Configures the mailer
 #
@@ -29,12 +29,12 @@ config :deeper_server, DeeperServerWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :deeper_server, DeeperServer.Mailer, adapter: Swoosh.Adapters.Local
+config :blog, Blog.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,
   version: "0.17.11",
-  deeper_server: [
+  blog: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
     cd: Path.expand("../assets", __DIR__),
@@ -44,7 +44,7 @@ config :esbuild,
 # Configure tailwind (the version is required)
 config :tailwind,
   version: "3.4.3",
-  deeper_server: [
+  blog: [
     args: ~w(
       --config=tailwind.config.js
       --input=css/app.css

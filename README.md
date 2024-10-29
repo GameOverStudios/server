@@ -1,4 +1,4 @@
-# DeeperServer
+# Blog
 
 To start your Phoenix server:
 

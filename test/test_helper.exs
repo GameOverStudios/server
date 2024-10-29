@@ -1,2 +1,2 @@
 ExUnit.start()
-Ecto.Adapters.SQL.Sandbox.mode(DeeperServer.Repo, :auto)
+Ecto.Adapters.SQL.Sandbox.mode(Blog.Repo, :manual)

@@ -1,9 +1,9 @@
-defmodule DeeperServer.MixProject do
+defmodule Blog.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :deeper_server,
+      app: :blog,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule DeeperServer.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {DeeperServer.Application, []},
+      mod: {Blog.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -38,6 +38,7 @@ defmodule DeeperServer.MixProject do
       {:ecto_sqlite3, ">= 0.0.0"},
       {:phoenix_html, "~> 4.1"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
+
       # TODO bump on release to {:phoenix_live_view, "~> 1.0.0"},
       {:phoenix_live_view, "~> 1.0.0-rc.1", override: true},
       {:floki, ">= 0.30.0", only: :test},
@@ -60,7 +61,18 @@ defmodule DeeperServer.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.5"},
 
-      {:plug, "~> 1.16.1"}
+      {:absinthe, "~> 1.7", override: true},
+      {:absinthe_plug, "~> 1.5"},
+      {:absinthe_phoenix, "~> 2.0.0"},
+      {:absinthe_relay, "~> 1.5.0"},
+      {:absinthe_graphql_ws, "~> 0.3"},
+
+      #{:absinthe_ecto, ">= 0.0.0"},
+      {:dataloader, "~> 2.0.0"},
+
+      #{:comeonin, "~> 4.0"},
+      #{:argon2_elixir, "~> 1.2"},
+
     ]
   end
 
@@ -77,10 +89,10 @@ defmodule DeeperServer.MixProject do
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
       "assets.setup": ["tailwind.install --if-missing", "esbuild.install --if-missing"],
-      "assets.build": ["tailwind deeper_server", "esbuild deeper_server"],
+      "assets.build": ["tailwind blog", "esbuild blog"],
       "assets.deploy": [
-        "tailwind deeper_server --minify",
-        "esbuild deeper_server --minify",
+        "tailwind blog --minify",
+        "esbuild blog --minify",
         "phx.digest"
       ]
     ]
