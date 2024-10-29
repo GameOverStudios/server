@@ -1,4 +1,4 @@
-# Blog
+# Todos
 
 To start your Phoenix server:
 
